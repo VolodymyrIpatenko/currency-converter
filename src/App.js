@@ -5,21 +5,26 @@ import { HiSwitchHorizontal } from 'react-icons/hi';
 import 'react-dropdown/style.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { MainSection, CurrenciesContainer, Input, ConvertBtn, ResultContainer } from './App.styled';
+import {
+  MainSection,
+  CurrenciesContainer,
+  Input,
+  ConvertBtn,
+  ResultContainer,
+} from './App.styled';
 
 function App() {
   const [exchangeRates, setExchangeRates] = useState([]);
   const [input, setInput] = useState(0);
   const [from, setFrom] = useState('usd');
   const [to, setTo] = useState('uah');
-  const [currencies, setCurrencies] = useState([]);
   const [output, setOutput] = useState(0);
 
-  const handleInput = (e) => {
+  const handleInput = e => {
     let userValue = e.target.value;
     userValue = userValue
       .split('')
-      .filter((el) => el.trim())
+      .filter(el => el.trim())
       .join('');
     if (Number.isNaN(Number(userValue))) {
       toast.error('Please enter a number');
@@ -29,16 +34,17 @@ function App() {
 
   useEffect(() => {
     axios
-      .get(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`)
-      .then((res) => {
+      .get(
+        `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`
+      )
+      .then(res => {
         setExchangeRates(res.data[from]);
       });
   }, [from]);
 
-  useEffect(() => {
-    setCurrencies(Object.keys(exchangeRates));
-    convert();
-  }, [exchangeRates]);
+  console.log(exchangeRates);
+
+  const currencies = Object.keys(exchangeRates);
 
   function convert() {
     let rate = exchangeRates[to];
@@ -58,13 +64,17 @@ function App() {
       <CurrenciesContainer>
         <div>
           <h3>Amount</h3>
-          <Input type="text" placeholder="Enter the amount" onChange={(e) => handleInput(e)} />
+          <Input
+            type="text"
+            placeholder="Enter the amount"
+            onChange={e => handleInput(e)}
+          />
         </div>
         <div>
           <h3>From</h3>
           <Dropdown
             options={currencies}
-            onChange={(e) => {
+            onChange={e => {
               setFrom(e.value);
             }}
             value={from}
@@ -77,7 +87,7 @@ function App() {
             backgroundColor: 'forestgreen',
             borderRadius: '50%',
             padding: '3px',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
           size="30px"
           onClick={() => {
@@ -88,7 +98,7 @@ function App() {
           <h3>To</h3>
           <Dropdown
             options={currencies}
-            onChange={(e) => {
+            onChange={e => {
               setTo(e.value);
             }}
             value={to}
@@ -100,7 +110,8 @@ function App() {
         <ConvertBtn
           onClick={() => {
             convert();
-          }}>
+          }}
+        >
           Convert
         </ConvertBtn>
         <h2>Converted Amount:</h2>
@@ -111,3 +122,4 @@ function App() {
 }
 
 export default App;
+
