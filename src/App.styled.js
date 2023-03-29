@@ -9,9 +9,13 @@ export const MainSection = styled.main`
 `;
 
 export const CurrenciesContainer = styled.section`
-  display: flex;
-  align-items: center;
+  display: grid;
   gap: 50px;
+  @media screen and (min-width: 1199px) {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
 `;
 
 export const Input = styled.input`
@@ -42,3 +46,4 @@ export const ConvertBtn = styled.button`
   background-color: rgb(226, 252, 184);
   cursor: pointer;
 `;
+
