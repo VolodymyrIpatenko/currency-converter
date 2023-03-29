@@ -42,8 +42,6 @@ function App() {
       });
   }, [from]);
 
-  console.log(exchangeRates);
-
   const currencies = Object.keys(exchangeRates);
 
   function convert() {
