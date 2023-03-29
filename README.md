@@ -2,7 +2,7 @@
 
 ### [Site link](https://currency-converter-indol-rho.vercel.app/)
 
-Layout supports mobile version up to 478 and desktop up to 1440 versions
+Layout supports mobile version up to 478px and desktop up to 1440px
 
 ### Tech stack:
 
