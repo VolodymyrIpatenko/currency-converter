@@ -50,7 +50,6 @@ function App() {
   }
 
   function flip() {
-    let temp = from;
     setFrom(to);
     setTo(temp);
   }
